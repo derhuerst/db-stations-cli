@@ -1,0 +1,32 @@
+{
+	"name": "db-stations-cli",
+	"description": "Find and filter DB stations from the command line.",
+	"version": "1.0.0",
+	"bin": {
+		"db-stations": "cli.js"
+	},
+	"files": [
+		"cli.js"
+	],
+	"keywords": [
+		"db",
+		"deutsche bahn",
+		"stations",
+		"filter",
+		"find",
+		"search",
+		"cli"
+	],
+	"author": "Jannis R <mail@jannisr.de>",
+	"homepage": "https://github.com/derhuerst/db-stations-cli",
+	"repository": "derhuerst/db-stations-cli",
+	"bugs": "https://github.com/derhuerst/db-stations-cli/issues",
+	"license": "ISC",
+	"engines": {
+		"node": ">=6"
+	},
+	"dependencies": {
+	},
+	"scripts": {
+	}
+}
