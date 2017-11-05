@@ -6,7 +6,8 @@
 		"db-stations": "cli.js"
 	},
 	"files": [
-		"cli.js"
+		"cli.js",
+		"lib"
 	],
 	"keywords": [
 		"db",
@@ -26,6 +27,10 @@
 		"node": ">=6"
 	},
 	"dependencies": {
+		"db-stations": "^1.22.0",
+		"mri": "^1.1.0",
+		"pump": "^1.0.2",
+		"tokenize-db-station-name": "^1.0.0"
 	},
 	"scripts": {
 	}
