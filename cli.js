@@ -2,9 +2,11 @@
 'use strict'
 
 const mri = require('mri')
+const stations = require('db-stations')
 
 const pkg = require('./package.json')
 const createFilter = require('./lib/create-filter')
+const formats  = require('./lib/formats')
 
 const argv = mri(process.argv.slice(2), {
 	boolean: ['help', 'h', 'version', 'v']
@@ -66,4 +68,13 @@ for (let i = 0; i < argv._; i++) {
 	}
 }
 
-// todo
+const columns = (argv['columns'] || 'id,coords,weight,name').split(',')
+const format = formats[argv.format](columns) || formats.csv(columns)
+
+pump(
+	stations(),
+	...filters,
+	format,
+	process.stdout,
+	showError
+)
