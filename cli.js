@@ -23,7 +23,7 @@ Options:
     --latitude   <value>              Filter by latitude.
     --longitude  <value>              Filter by longitude.
     --weight     <value>              Filter by weight.
-    --format     <csv|ndjson>         Default is ndjson.
+    --format     <csv|ndjson|pretty>  Default is pretty.
     --columns    <value>,<value>,…    Default is id,coords,weight,name.
 
 Filters:
@@ -69,7 +69,7 @@ for (let i = 0; i < argv._; i++) {
 }
 
 const columns = (argv['columns'] || 'id,coords,weight,name').split(',')
-const format = formats[argv.format](columns) || formats.csv(columns)
+const format = formats[argv.format](columns) || formats.pretty(columns)
 
 pump(
 	stations(),
