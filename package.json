@@ -44,5 +44,6 @@
 		"window-size": "^1.1.0"
 	},
 	"scripts": {
+		"test": "./cli.js >/dev/null && ./cli.js --format csv >/dev/null && ./cli.js --format ndjson >/dev/null"
 	}
 }
