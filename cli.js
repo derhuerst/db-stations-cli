@@ -3,6 +3,8 @@
 
 const mri = require('mri')
 const stations = require('db-stations')
+const filterStream = require('stream-filter')
+const pump = require('pump')
 
 const pkg = require('./package.json')
 const createFilter = require('./lib/create-filter')
@@ -22,9 +24,8 @@ Options:
     --name       <value>              Filter by name.
     --latitude   <value>              Filter by latitude.
     --longitude  <value>              Filter by longitude.
-    --weight     <value>              Filter by weight.
     --format     <csv|ndjson|pretty>  Default is pretty.
-    --columns    <value>,<value>,…    Default is id,coords,weight,name.
+    --columns    <value>,<value>,…    Default is id,coords,name.
 
 Filters:
     Each filter must be an \`Array.prototype.filter\`-compatible funtion.
@@ -32,7 +33,7 @@ Filters:
 Examples:
     db-stations
     db-stations --name 'elfershausen trimberg'
-    db-stations --id 8005229 --columns id,name,weight
+    db-stations --id 8005229 --columns id,name
     db-stations "(s) => s.latitude > 53" "(s) => s.latitude > 12"
 \n`)
 	process.exit()
@@ -46,13 +47,11 @@ const showError = (err) => {
 
 
 let selector = Object.create(null)
+if (argv.id) selector.id = argv.id.toString().trim()
+if (argv.name) selector.name = argv.name
+if ('latitude' in argv) selector.latitude = parseFloat(argv.latitude)
+if ('longitude' in argv) selector.longitude = parseFloat(argv.longitude)
 if (Object.keys(selector).length === 0) selector = 'all'
-else {
-	if (argv.id) selector.id = argv.id.toString().trim()
-	if ('latitude' in argv) selector.latitude = parseFloat(argv.latitude)
-	if ('longitude' in argv) selector.longitude = parseFloat(argv.longitude)
-	if ('weight' in argv) selector.weight = parseFloat(argv.weight)
-}
 
 const filters = [
 	filterStream.obj(createFilter(selector))
@@ -68,8 +67,8 @@ for (let i = 0; i < argv._; i++) {
 	}
 }
 
-const columns = (argv['columns'] || 'id,coords,weight,name').split(',')
-const format = formats[argv.format](columns) || formats.pretty(columns)
+const columns = (argv['columns'] || 'id,coords,name').split(',')
+const format = (formats[argv.format] || formats.pretty)(columns)
 
 pump(
 	stations(),
