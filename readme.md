@@ -28,8 +28,9 @@ Options:
     --name       <value>              Filter by name.
     --latitude   <value>              Filter by latitude.
     --longitude  <value>              Filter by longitude.
+    --weight     <value>              Filter by weight.
     --format     <csv|ndjson|pretty>  Default is pretty.
-    --columns    <value>,<value>,…    Default is id,coords,name.
+    --columns    <value>,<value>,…    Default is id,coords,weight,name.
 
 Filters:
     Each filter must be an `Array.prototype.filter`-compatible funtion.
@@ -37,7 +38,7 @@ Filters:
 Examples:
     db-stations
     db-stations --name 'elfershausen trimberg'
-    db-stations --id 8005229 --columns id,name
+    db-stations --id 8005229 --columns id,name,weight
     db-stations "(s) => s.latitude > 53" "(s) => s.latitude > 12"
 ```
 
