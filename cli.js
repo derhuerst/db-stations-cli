@@ -2,12 +2,12 @@
 'use strict'
 
 const mri = require('mri')
+const createFilter = require('db-stations/create-filter')
 const stations = require('db-stations')
 const filterStream = require('stream-filter')
 const pump = require('pump')
 
 const pkg = require('./package.json')
-const createFilter = require('./lib/create-filter')
 const formats  = require('./lib/formats')
 
 const argv = mri(process.argv.slice(2), {
