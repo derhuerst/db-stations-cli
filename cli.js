@@ -35,7 +35,7 @@ Examples:
     db-stations
     db-stations --name 'elfershausen trimberg'
     db-stations --id 8005229 --columns id,name,weight
-    db-stations "(s) => s.latitude > 53" "(s) => s.latitude > 12"
+    db-stations 'return s.weight > 2000'
 \n`)
 	process.exit()
 }
@@ -58,11 +58,11 @@ if (Object.keys(selector).length === 0) selector = 'all'
 const filters = [
 	filterStream.obj(createFilter(selector))
 ]
-for (let i = 0; i < argv._; i++) {
+for (let i = 0; i < argv._.length; i++) {
 	const code = argv._[i]
 
 	try {
-		const filterFn = new Function(code)
+		const filterFn = new Function('s', code)
 		filters.push(filterStream.obj(filterFn))
 	} catch (err) {
 		showError(`Argument ${i} is not a valid JS function.`)

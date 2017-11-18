@@ -39,7 +39,7 @@ Examples:
     db-stations
     db-stations --name 'elfershausen trimberg'
     db-stations --id 8005229 --columns id,name,weight
-    db-stations "(s) => s.latitude > 53" "(s) => s.latitude > 12"
+    db-stations 'return s.weight > 2000'
 ```
 
 
