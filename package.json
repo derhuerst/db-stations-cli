@@ -1,7 +1,7 @@
 {
 	"name": "db-stations-cli",
 	"description": "Find and filter DB stations from the command line.",
-	"version": "1.0.1",
+	"version": "2.0.0",
 	"bin": {
 		"db-stations": "cli.js"
 	},

@@ -17,6 +17,8 @@
 npm install -g db-stations-cli
 ```
 
+Or use [`npx`](https://npmjs.com/package/npx). ✨
+
 
 ## Usage
 
