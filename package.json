@@ -28,7 +28,7 @@
 	},
 	"dependencies": {
 		"chalk": "^3.0.0",
-		"cli-truncate": "^2.0.0",
+		"cli-truncate": "^3.0.0",
 		"csv-write-stream": "^2.0.0",
 		"db-stations": "^3.0.0",
 		"duplexer3": "^0.1.4",
