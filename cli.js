@@ -2,16 +2,15 @@
 'use strict'
 
 const mri = require('mri')
-const createFilter = require('db-stations/create-filter')
-const stations = require('db-stations')
-const filterStream = require('stream-filter')
-const {pipeline} = require('stream')
 
 const pkg = require('./package.json')
 const formats  = require('./lib/formats')
 
 const argv = mri(process.argv.slice(2), {
-	boolean: ['help', 'h', 'version', 'v']
+	boolean: [
+		'help', 'h',
+		'version', 'v',
+	]
 })
 
 if (argv.help || argv.h) {
@@ -37,8 +36,18 @@ Examples:
     db-stations --id 8005229 --columns id,name,weight
     db-stations 'return s.weight > 2000'
 \n`)
-	process.exit()
+	process.exit(0)
 }
+
+if (argv.version || argv.v) {
+	process.stdout.write(`${pkg.name} v${pkg.version}\n`)
+	process.exit(0)
+}
+
+const createFilter = require('db-stations/create-filter')
+const stations = require('db-stations')
+const filterStream = require('stream-filter')
+const {pipeline} = require('stream')
 
 const showError = (err) => {
 	if (!err) return;
