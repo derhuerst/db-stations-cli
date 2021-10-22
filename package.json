@@ -42,7 +42,12 @@
 		"tokenize-db-station-name": "^3.0.0",
 		"window-size": "^1.1.0"
 	},
+	"devDependencies": {
+		"eslint": "^8.0.1"
+	},
 	"scripts": {
-		"test": "./cli.js >/dev/null && ./cli.js --format csv >/dev/null && ./cli.js --format ndjson >/dev/null"
+		"lint": "eslint .",
+		"test": "./cli.js >/dev/null && ./cli.js --format csv >/dev/null && ./cli.js --format ndjson >/dev/null",
+		"prepublishOnly": "npm run lint && npm test"
 	}
 }
