@@ -5,7 +5,7 @@ const mri = require('mri')
 const createFilter = require('db-stations/create-filter')
 const stations = require('db-stations')
 const filterStream = require('stream-filter')
-const pump = require('pump')
+const {pipeline} = require('stream')
 
 const pkg = require('./package.json')
 const formats  = require('./lib/formats')
@@ -41,7 +41,8 @@ Examples:
 }
 
 const showError = (err) => {
-	console.error(err.message || (err + ''))
+	if (!err) return;
+	console.error(err)
 	process.exit(1)
 }
 
@@ -72,7 +73,7 @@ for (let i = 0; i < argv._.length; i++) {
 const columns = (argv['columns'] || 'id,coords,weight,name').split(',')
 const format = (formats[argv.format] || formats.pretty)(columns)
 
-pump(
+pipeline(
 	stations(),
 	...filters,
 	format,
